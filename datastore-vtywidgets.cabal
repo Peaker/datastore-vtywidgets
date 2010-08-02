@@ -1,0 +1,28 @@
+Name:                datastore-vtywidgets
+Version:             0.0.1
+Cabal-Version:       >= 1.2
+Synopsis:            Datastore functions useful when integrating with vtywidgets
+Category:            editors, development
+Description:
+  Datastore functions useful when integrating with vtywidgets. These
+  are not in datastore itself to avoid having datastore depend on
+  vtywidgets.
+
+Author:              Eyal Lotem
+Maintainer:          eyal.lotem@gmail.com
+Copyright:           (c) 2010 by Eyal Lotem
+License:             GPL
+Stability:           experimental
+build-type:          Simple
+
+Library
+  hs-Source-Dirs:      src
+  Extensions:
+  Build-Depends:       base >= 4 && < 5, 
+                       vtywidgets >= 0.0.6 && < 0.1,
+                       vty >= 4.2.1 && < 4.3,
+                       datastore >= 0.0 && < 0.1
+  Exposed-Modules:     Data.Store.VtyWidgets
+  ghc-options:         -O2 -Wall
+  ghc-prof-options:    -prof -auto-all
+
