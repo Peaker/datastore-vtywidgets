@@ -9,7 +9,6 @@ where
 
 import           Control.Monad                     (when, liftM)
 import           Data.Function.Utils               (result)
-import qualified Graphics.Vty                      as Vty
 import qualified Graphics.UI.VtyWidgets.Box        as Box
 import qualified Graphics.UI.VtyWidgets.TextEdit   as TextEdit
 import qualified Graphics.UI.VtyWidgets.Completion as Completion
@@ -69,31 +68,29 @@ makeWidget :: Monad m =>
 makeWidget w ref = (fmap (Property.set ref) . w) `liftM`
                    Property.get ref
 
-makeTextEdit :: Monad m => String -> Int -> Vty.Attr -> Vty.Attr ->
+makeTextEdit :: Monad m => TextEdit.Theme -> String -> Int ->
                 Transaction.Property t m TextEdit.Model ->
                 MWidget (Transaction t m)
 makeTextEdit =
-  (result . result . result . result) makeWidget TextEdit.make
+  (result . result . result) makeWidget TextEdit.make
 
 makeCompletion :: Monad m =>
-                  [(String, Int)] -> Int -> Vty.Color -> Vty.Attr -> Vty.Attr ->
-                  String -> Int -> Vty.Attr -> Vty.Attr ->
+                  Completion.Theme ->
+                  [(String, Int)] -> Int -> String -> Int ->
                   Transaction.Property t m Completion.Model ->
                   MWidget (Transaction t m)
 makeCompletion =
   (result . result . result .
-   result . result . result .
-   result . result . result) makeWidget Completion.make
+   result . result) makeWidget Completion.make
 
 makeSimpleCompletion :: Monad m =>
-                        [String] -> Int -> Vty.Color -> Vty.Attr -> Vty.Attr ->
-                        String -> Int -> Vty.Attr -> Vty.Attr ->
+                        Completion.Theme ->
+                        [String] -> Int -> String -> Int ->
                         Transaction.Property t m Completion.Model ->
                         MWidget (Transaction t m)
 makeSimpleCompletion =
   (result . result . result .
-   result . result . result .
-   result . result . result) makeWidget Completion.makeSimple
+   result . result) makeWidget Completion.makeSimple
 
 makeChoiceWidget :: Monad m =>
                     Box.Orientation ->
