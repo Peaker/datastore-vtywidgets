@@ -3,7 +3,7 @@
 module Data.Store.VtyWidgets
     (MWidget, TWidget,
      appendBoxChild, popCurChild,
-     makeBox, makeTextEdit, makeCompletion, makeSimpleCompletion, makeChoiceWidget,
+     makeBox, makeTextEdit, makeLineEdit, makeCompletion, makeSimpleCompletion, makeChoiceWidget,
      widgetDownTransaction)
 where
 
@@ -73,6 +73,12 @@ makeTextEdit :: Monad m => TextEdit.Theme -> String -> Int ->
                 MWidget (Transaction t m)
 makeTextEdit =
   (result . result . result) makeWidget TextEdit.make
+
+makeLineEdit :: Monad m => TextEdit.Theme -> String ->
+                Transaction.Property t m TextEdit.Model ->
+                MWidget (Transaction t m)
+makeLineEdit =
+  (result . result) makeWidget TextEdit.lineEdit
 
 makeCompletion :: Monad m =>
                   Completion.Theme ->
