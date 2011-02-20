@@ -18,9 +18,9 @@ build-type:          Simple
 Library
   hs-Source-Dirs:      src
   Extensions:
-  Build-Depends:       base >= 4 && < 5, 
+  Build-Depends:       base >= 4 && < 5,
                        vtywidgets >= 0.0.6 && < 0.1,
-                       vty >= 4.2.1 && < 4.3,
+                       vty >= 4.6 && < 4.7,
                        datastore >= 0.0 && < 0.1
   Exposed-Modules:     Data.Store.VtyWidgets
   ghc-options:         -O2 -Wall
